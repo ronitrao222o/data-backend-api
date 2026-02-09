@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from models import Sale
 import crud
-import sqlite3
 
 app = FastAPI(title="Data Backend API")
+
 
 @app.get("/sales")
 def list_sales(limit: int = 10, offset: int = 0):
@@ -13,6 +13,11 @@ def list_sales(limit: int = 10, offset: int = 0):
 @app.get("/sales/customer/{customer_id}")
 def sales_by_customer(customer_id: str):
     return crud.get_sales_by_customer(customer_id)
+
+
+@app.get("/sales/category/{category}")
+def sales_by_category(category: str, limit: int = 10, offset: int = 0):
+    return crud.get_sales_by_category(category, limit, offset)
 
 
 @app.post("/sales")
