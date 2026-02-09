@@ -8,6 +8,7 @@ pagination, and insertion of records.
 ## Endpoints
 - GET /sales?limit=&offset=
 - GET /sales/customer/{customer_id}
+- GET /sales/category/{category}?limit=&offset=
 - POST /sales
 
 ## Architecture
