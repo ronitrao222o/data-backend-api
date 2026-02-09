@@ -47,3 +47,17 @@ def add_sale(sale):
 
     conn.commit()
     conn.close()
+    def get_sales_by_category(category, limit=10, offset=0):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM sales
+        WHERE category = ?
+        LIMIT ? OFFSET ?
+    """, (category, limit, offset))
+
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
