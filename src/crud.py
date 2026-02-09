@@ -1,5 +1,6 @@
 from database import get_connection
 
+
 def get_sales(limit=10, offset=0):
     conn = get_connection()
     cursor = conn.cursor()
@@ -27,6 +28,21 @@ def get_sales_by_customer(customer_id):
     return rows
 
 
+def get_sales_by_category(category, limit=10, offset=0):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM sales
+        WHERE category = ?
+        LIMIT ? OFFSET ?
+    """, (category, limit, offset))
+
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
 def add_sale(sale):
     conn = get_connection()
     cursor = conn.cursor()
@@ -47,17 +63,3 @@ def add_sale(sale):
 
     conn.commit()
     conn.close()
-    def get_sales_by_category(category, limit=10, offset=0):
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT * FROM sales
-        WHERE category = ?
-        LIMIT ? OFFSET ?
-    """, (category, limit, offset))
-
-    rows = cursor.fetchall()
-    conn.close()
-    return rows
-
