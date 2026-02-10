@@ -7,17 +7,33 @@ app = FastAPI(title="Data Backend API")
 
 @app.get("/sales")
 def list_sales(limit: int = 10, offset: int = 0):
-    return crud.get_sales(limit, offset)
+    items = crud.get_sales(limit, offset)
+    return {
+        "items": items,
+        "limit": limit,
+        "offset": offset,
+        "count": len(items)
+    }
 
 
 @app.get("/sales/customer/{customer_id}")
 def sales_by_customer(customer_id: str):
-    return crud.get_sales_by_customer(customer_id)
+    items = crud.get_sales_by_customer(customer_id)
+    return {
+        "items": items,
+        "count": len(items)
+    }
 
 
 @app.get("/sales/category/{category}")
 def sales_by_category(category: str, limit: int = 10, offset: int = 0):
-    return crud.get_sales_by_category(category, limit, offset)
+    items = crud.get_sales_by_category(category, limit, offset)
+    return {
+        "items": items,
+        "limit": limit,
+        "offset": offset,
+        "count": len(items)
+    }
 
 
 @app.post("/sales")
