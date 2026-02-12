@@ -20,6 +20,15 @@ to help clients manage large result sets.
 - Modular CRUD-based design
 - Pagination metadata included in API responses
 
+## Design Decisions
+
+- Used FastAPI for its lightweight structure and automatic OpenAPI documentation.
+- Chose SQLite for simplicity and easy local development.
+- Implemented pagination to prevent large payload responses.
+- Added filtering endpoints to keep API flexible and scalable.
+- Separated CRUD logic from API routes to maintain clean architecture.
+
+
 ## How to Run
 ```bash
 pip install -r requirements.txt
